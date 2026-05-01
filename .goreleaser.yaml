@@ -11,31 +11,25 @@ builds:
     binary: wireguird
     env:
       - CGO_ENABLED=1
-    goos: [linux]
-    goarch: [arm64]
-    flags: [-trimpath]
+    goos:
+      - linux
+    goarch:
+      - arm64
+    flags:
+      - -trimpath
     ldflags:
       - -s -w
-
-archives:
-  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    files:
-      - src: ./deb/usr/share/applications/wireguird.desktop
-        dst: /usr/share/applications/wireguird.desktop
-      - src: ./deb/usr/share/polkit-1/actions/wireguird.policy
-        dst: /usr/share/polkit-1/actions/wireguird.policy
-      - src: ./Icon/**/*
-        dst: /usr/share/wireguird/Icon/
 
 nfpms:
   - id: debian_family
     package_name: wireguird
-    vendor: "UnnoTed"
-    maintainer: "UnnoTed"
-    description: "GTK GUI for Wireguard"
-    license: "MIT"
-    homepage: "https://github.com/UnnoTed/wireguird"
-    formats: [deb]
+    vendor: UnnoTed
+    maintainer: UnnoTed
+    description: GTK GUI for Wireguard
+    license: MIT
+    homepage: https://github.com/UnnoTed/wireguird
+    formats:
+      - deb
     bindir: /usr/bin
     dependencies:
       - wireguard-tools
